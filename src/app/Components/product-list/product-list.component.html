@@ -1,0 +1,18 @@
+<ul>
+  <ng-container *ngFor="let prod of products; index as i">
+      <li>
+        <div>Name: {{prod.name}}</div>
+        <div>Qnt: {{prod.qnt}}</div>
+        <div>Price: {{prod.currPrice | currency:"USD":'symbol':'1.2-2'}}</div>
+        <div *ngIf="prod.priceChange !== undefined">
+          <div *ngIf="prod.priceChange < 0" style="color: green">
+            Last change: {{prod.priceChange}}%
+          </div>
+          <div *ngIf="prod.priceChange > 0" style="color: red">
+              Last change: {{prod.priceChange}}%
+          </div>
+        </div>
+        <button mat-raised-button color="green" (click)="addToCard(prod)">Add to card</button>
+      </li>
+  </ng-container>
+</ul>

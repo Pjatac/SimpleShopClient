@@ -1,0 +1,6 @@
+<div>
+  <app-product-list [(products)]="products" (callAddToCard)="callAddToCard($event)"></app-product-list>
+</div>
+<div>
+  <app-purchase-card [(card)]="card" [(dataSource)]="dataSource" (buyCard)="buyCard($event)" (removeItem)="removeItem($event)" (incQnt)="incQnt($event)" (decQnt)="decQnt($event)"></app-purchase-card>
+</div>

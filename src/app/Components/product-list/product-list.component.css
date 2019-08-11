@@ -1,0 +1,13 @@
+ul {
+    float: left;
+    text-align: justify;
+    list-style: none;
+    margin: 0; 
+    padding: 0;
+    width: 100%;
+}
+li {
+    float: left;
+    padding: 20px;
+    margin: 0 auto;
+}

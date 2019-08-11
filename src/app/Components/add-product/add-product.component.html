@@ -1,0 +1,17 @@
+<div>
+  <form [formGroup]="prodForm" (ngSubmit)="onSubmit()"> 
+    <mat-form-field>
+      <input type="text" placeholder="Please, input name" matInput formControlName="name" [(ngModel)]="value">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" placeholder="Please, input quantity" matInput formControlName="qnt">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="number" placeholder="Please, input price" matInput formControlName="price">
+    </mat-form-field>
+    <button type="submit" [disabled]="!prodForm.valid">Submit</button>
+  </form>
+</div>
