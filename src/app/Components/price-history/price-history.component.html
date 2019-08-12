@@ -17,3 +17,20 @@
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+<label>
+  <mat-form-field>
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let prod of products" [value]="prod">
+        {{prod}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button style="margin: 1em" mat-raised-button (click)="buildChart()" *ngIf="selected !== undefined"> Build chart</button>
+</label>
+<div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;">
+  <div style="display: block" *ngIf="chartDatasets.length > 0">
+    <canvas baseChart [chartType]="'line'" [datasets]="chartDatasets" [labels]="chartLabels" [options]="chartOptions"
+      [legend]="true">
+    </canvas>
+  </div>
+</div>

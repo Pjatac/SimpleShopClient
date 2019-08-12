@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { PriceChangeItem } from 'src/app/Models/priceChangeItem';
 
 const SERVER_URL = 'http://localhost:8080';
 
@@ -50,5 +51,26 @@ export default class ConnectService {
                 observer.next(data);
             });
         });
+    }
+    findProducts(changes: PriceChangeItem[]){
+        var unicProds = new Array();
+        for (let prod of changes)
+            if (unicProds.indexOf(prod.name) === -1)
+                unicProds.push(prod.name);
+        return unicProds;
+    }
+    buildChartDataSet(changes: PriceChangeItem[], selected: string){
+        var data = new Array();
+        for (let prod of changes)
+            if (prod.name = selected) 
+                 data.push(prod.price);
+        return [{data: data, label: selected}];
+    }
+    buildChartLabels(changes: PriceChangeItem[], selected: string){
+        var data = new Array();
+        for (let prod of changes)
+            if (prod.name = selected) 
+                 data.push(prod.date);
+        return data;
     }
 }
