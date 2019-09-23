@@ -9,7 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './price-history.component.html',
   styleUrls: ['./price-history.component.css']
 })
+
 export class PriceHistoryComponent implements OnInit {
+
   priceChanges: PriceChangeItem[];
   dataSource = new MatTableDataSource<PriceChangeItem>(this.priceChanges);
   displayedColumns: string[] = ['name', 'price', 'date-time'];
@@ -23,7 +25,9 @@ export class PriceHistoryComponent implements OnInit {
   };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private connectService: ConnectService) { }
+
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.connectService
@@ -35,6 +39,7 @@ export class PriceHistoryComponent implements OnInit {
       });
     this.connectService.emitGetPriceChanges();
   }
+  
   buildChart(){
     this.chartDatasets = this.connectService.buildChartDataSet(this.priceChanges, this.selected);
     this.chartLabels = this.connectService.buildChartLabels(this.priceChanges, this.selected);

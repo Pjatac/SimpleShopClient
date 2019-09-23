@@ -8,6 +8,7 @@ const SERVER_URL = 'http://localhost:8080';
 @Injectable({
     providedIn: 'root'
 })
+
 export default class ConnectService {
 
     public socket;
@@ -52,6 +53,7 @@ export default class ConnectService {
             });
         });
     }
+
     findProducts(changes: PriceChangeItem[]){
         var unicProds = new Array();
         for (let prod of changes)
@@ -59,6 +61,7 @@ export default class ConnectService {
                 unicProds.push(prod.name);
         return unicProds;
     }
+
     buildChartDataSet(changes: PriceChangeItem[], selected: string){
         var data = new Array();
         for (let prod of changes)
@@ -66,6 +69,7 @@ export default class ConnectService {
                  data.push(prod.price);
         return [{data: data, label: selected}];
     }
+    
     buildChartLabels(changes: PriceChangeItem[], selected: string){
         var data = new Array();
         for (let prod of changes)

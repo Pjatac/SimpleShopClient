@@ -8,7 +8,9 @@ import { ChartsModule } from 'ng2-charts';
   templateUrl: './purchase-history.component.html',
   styleUrls: ['./purchase-history.component.css']
 })
+
 export class PurchaseHistoryComponent implements OnInit {
+  
   purchases: PurchaseItem[][];
   displayedColumns: string[] = ['name', 'qnt', 'price','cost'];
 

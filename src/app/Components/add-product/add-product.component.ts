@@ -11,17 +11,21 @@ import { MydialogComponent } from '../mydialog/mydialog.component';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
+
 export class AddProductComponent implements OnInit {
+
   newProduct: Product;
   prodForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     qnt: new FormControl('', [Validators.required, Validators.min(1)]),
     price: new FormControl('', [Validators.required, Validators.min(0.01)]),
   });
+
   constructor(private productService: ProductService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
+  
   async onSubmit() {
     this.newProduct = {
       name: this.prodForm.controls["name"].value,

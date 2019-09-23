@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
 })
+
 export default class PurchaseCardService {
 
     card: CardItem[];
@@ -48,7 +49,11 @@ export default class PurchaseCardService {
         this.card = await this.httpClient.post<CardItem[]>('http://localhost:8080/card/deq', cardItem).toPromise();
     }
 
-    purchase() {
-        this.card = new Array();
+    async purchase() {
+        const str = await this.httpClient.get('http://localhost:8080/purchase').toPromise();
+        if ( typeof (str) === 'string' ){
+            this.card = new Array();
+            return str;
+        }
     }
 }

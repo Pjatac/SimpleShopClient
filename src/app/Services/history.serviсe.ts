@@ -7,6 +7,7 @@ import { PriceChangeItem } from '../Models/priceChangeItem';
 @Injectable({
     providedIn: 'root'
 })
+
 export default class HistoryService {
 
     purchases: PurchaseItem[][];
@@ -30,6 +31,7 @@ export default class HistoryService {
         }
         this.purchases.push(purchase);
     }
+    
     async getPurchases() {
         const newPurchases = await this.httpClient.get<any[]>('http://localhost:4000/api/purchases').toPromise();
         this.purchases = newPurchases.map(o => o.purchases);
