@@ -8,11 +8,15 @@ import { PriceChangeItem } from '../Models/priceChangeItem';
     providedIn: 'root'
 })
 
-export default class HistoryService {
 
+
+
+export default class HistoryService {
+    
     purchases: PurchaseItem[][];
     changes: PriceChangeItem[];
-
+    SERVER_URL = 'http://localhost:8080';
+    //SERVER_URL = 'https://pjatak-simple-shop.azurewebsites.net';
     constructor(private httpClient: HttpClient) { }
 
     addNewPurchase(purchase: PurchaseItem[]) {
@@ -33,13 +37,13 @@ export default class HistoryService {
     }
     
     async getPurchases() {
-        const newPurchases = await this.httpClient.get<any[]>('http://localhost:4000/api/purchases').toPromise();
+        const newPurchases = await this.httpClient.get<any[]>(this.SERVER_URL + '/api/purchases').toPromise();
         this.purchases = newPurchases.map(o => o.purchases);
         return this.purchases;
     }
 
     async getPriceChanges() {
-        const newPriceChanges = await this.httpClient.get<PriceChangeItem[]>('http://localhost:4000/api/prices').toPromise();
+        const newPriceChanges = await this.httpClient.get<PriceChangeItem[]>(this.SERVER_URL + '/api/prices').toPromise();
         this.changes = newPriceChanges as PriceChangeItem[];
         return this.changes;
     }

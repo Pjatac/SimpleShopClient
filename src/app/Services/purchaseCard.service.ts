@@ -10,13 +10,14 @@ import { HttpClient } from '@angular/common/http';
 export default class PurchaseCardService {
 
     card: CardItem[];
-
+    SERVER_URL = 'http://localhost:8080';
+    //SERVER_URL = 'https://pjatak-simple-shop.azurewebsites.net';
     constructor(private httpClient: HttpClient) {
         this.card = new Array();
     }
 
     async getPurchaseCardItems() {
-        let res = await this.httpClient.get<any>('http://localhost:8080/card').toPromise();
+        let res = await this.httpClient.get<any>(this.SERVER_URL + '/card').toPromise();
         if (res === undefined || res === null)
             this.card = new Array();
         else {
@@ -26,7 +27,7 @@ export default class PurchaseCardService {
     }
 
     recalculate(products: Product[]) {
-        if (this.card.length > 0)
+        if (this.card && this.card.length > 0)
             for (let prod of products)
                 for (let i = 0; i < this.card.length; i++)
                     if (prod.name === this.card[i].name)
@@ -34,23 +35,23 @@ export default class PurchaseCardService {
     }
 
     async addToCard(cardItem: CardItem) {
-        this.card = await this.httpClient.post<CardItem[]>('http://localhost:8080/card', cardItem).toPromise();
+        this.card = await this.httpClient.post<CardItem[]>(this.SERVER_URL + '/card', cardItem).toPromise();
     }
 
     async removeFromCard(cardItem: CardItem) {
-        this.card = await this.httpClient.post<CardItem[]>('http://localhost:8080/card/remove', cardItem).toPromise();
+        this.card = await this.httpClient.post<CardItem[]>(this.SERVER_URL + '/card/remove', cardItem).toPromise();
     }
 
     async incQnt(cardItem: CardItem) {
-        this.card = await this.httpClient.post<CardItem[]>('http://localhost:8080/card/inq', cardItem).toPromise();
+        this.card = await this.httpClient.post<CardItem[]>(this.SERVER_URL + '/card/inq', cardItem).toPromise();
     }
 
     async decQnt(cardItem: CardItem) {
-        this.card = await this.httpClient.post<CardItem[]>('http://localhost:8080/card/deq', cardItem).toPromise();
+        this.card = await this.httpClient.post<CardItem[]>(this.SERVER_URL + '/card/deq', cardItem).toPromise();
     }
 
     async purchase() {
-        const str = await this.httpClient.get('http://localhost:8080/purchase').toPromise();
+        const str = await this.httpClient.get(this.SERVER_URL + '/purchase').toPromise();
         if ( typeof (str) === 'string' ){
             this.card = new Array();
             return str;

@@ -9,14 +9,15 @@ import { HttpClient } from '@angular/common/http';
 export default class ProductService {
 
   products: Product[];
-
+  SERVER_URL = 'http://localhost:8080';
+  //SERVER_URL = 'https://pjatak-simple-shop.azurewebsites.net';
   constructor(private httpClient: HttpClient) { }
 
   async addProduct(product: Product): Promise<Product> {
     if (this.products === undefined) {
       this.products = new Array();
     }
-    const newProd = await this.httpClient.post('http://localhost:8080/addProduct', product).toPromise();
+    const newProd = await this.httpClient.post(this.SERVER_URL + '/addProduct', product).toPromise();
     if (typeof (newProd) !== 'string') {
       return newProd as Product;
     } else {
@@ -25,7 +26,7 @@ export default class ProductService {
   }
 
   async getProducts() {
-    let res = await this.httpClient.get<any>('http://localhost:8080/products').toPromise();
+    let res = await this.httpClient.get<any>(this.SERVER_URL + '/products').toPromise();
     if (res === undefined || res === null)
       this.products = new Array();
     else {
